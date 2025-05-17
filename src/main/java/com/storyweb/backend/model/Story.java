@@ -14,10 +14,11 @@ public class Story {
 
     public Story() {}
 
-    public Story(String title, String thumbnailUrl, String storyLink) {
+    public Story(String title, String thumbnailUrl, String storyLink, String id) {
+        this.id = id;
         this.title = title;
         this.thumbnailUrl = thumbnailUrl;
-        this.description = description;
+        
         this.storyLink = storyLink;
     }
 

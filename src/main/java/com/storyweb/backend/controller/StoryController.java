@@ -3,6 +3,7 @@ package com.storyweb.backend.controller;
 import com.storyweb.backend.model.Story;
 import com.storyweb.backend.repository.StoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,5 +35,15 @@ public Story updateStory(@PathVariable String id, @RequestBody Story updatedStor
         return storyRepository.save(story);
     }).orElseThrow(() -> new RuntimeException("Story not found with id " + id));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteStory(@PathVariable String id) {
+        if (!storyRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        storyRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+    
 
 }
